@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Sheilta Keepalive",
+  "version": "1.0",
+  "description": "Keeps your OpenU Sheilta session alive automatically.",
+  "permissions": ["tabs", "alarms", "storage"],
+  "host_permissions": ["https://sheilta.apps.openu.ac.il/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icon.png"
+  }
+}
