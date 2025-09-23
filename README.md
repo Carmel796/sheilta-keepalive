@@ -40,6 +40,7 @@ This extension periodically sends a refresh request in the background so you don
   ```
 
   Only runs if:
+
   - keepalive is enabled, **and**
   - a Sheilta tab is open.
 
@@ -53,9 +54,7 @@ sheilta-keepalive-extension/
 ├── background.js        # Background service worker
 ├── popup.html           # Popup UI markup
 ├── popup.js             # Popup UI logic
-├── icons/               # Extension icons (optional)
-└── docs/
-    └── extension-flow.md # Flow diagrams (popup ↔ background)
+└── icon.png               # Extension icon
 ```
 
 ---
@@ -87,8 +86,8 @@ See [`docs/extension-flow.md`](./docs/extension-flow.md) for full diagrams of ho
 
 ## ⚠️ Notes
 
-- Minimum interval is `0.1` minutes (~6 seconds).  
-- Chrome may clamp very small alarm intervals depending on platform. For stability, `≥ 1` minute is recommended in production.  
+- Minimum interval is `0.1` minutes (~6 seconds).
+- Chrome may clamp very small alarm intervals depending on platform. For stability, `≥ 1` minute is recommended in production.
 - This extension is a personal project and not officially affiliated with the Open University.
 
 ---
