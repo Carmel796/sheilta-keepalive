@@ -10,12 +10,8 @@
         --muted: #a9b7c1;
         --card: #15181d;
         --accent: #4da3ff;
-        --accent-weak: rgba(77, 163, 255, 0.25);
-        --ring: rgba(77, 163, 255, 0.55);
         --border: #21262d;
-        --shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
       }
-
       @media (prefers-color-scheme: light) {
         :root {
           --bg: #f7fafc;
@@ -23,66 +19,53 @@
           --muted: #576574;
           --card: #ffffff;
           --accent: #2563eb;
-          --accent-weak: rgba(37, 99, 235, 0.14);
-          --ring: rgba(37, 99, 235, 0.35);
           --border: #e6eaef;
-          --shadow: 0 6px 16px rgba(15, 20, 26, 0.08);
         }
       }
-
       html,
       body {
         margin: 0;
         padding: 0;
-        background: radial-gradient(
-            1200px 600px at 0% -10%,
-            var(--accent-weak),
-            transparent 60%
-          ),
-          var(--bg);
+        background: var(--bg);
         color: var(--fg);
         font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+          Arial;
       }
-
       .wrap {
-        width: 280px;
-        min-height: 140px;
+        width: 300px;
         padding: 16px;
-        display: grid;
-        place-items: stretch;
       }
-
       .card {
         background: var(--card);
         border: 1px solid var(--border);
-        box-shadow: var(--shadow);
         border-radius: 14px;
         padding: 14px 16px;
       }
-
       .header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
       }
-
       h3 {
-        font-size: 14px;
-        line-height: 1.2;
         margin: 0;
+        font-size: 14px;
         font-weight: 700;
-        letter-spacing: 0.2px;
       }
-
       .subtitle {
         margin-top: 6px;
         color: var(--muted);
         font-size: 12px;
       }
+      .row {
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
 
-      /* Toggle (pure checkbox, styled) */
+      /* Toggle */
       .toggle {
         --w: 44px;
         --h: 24px;
@@ -92,19 +75,11 @@
         height: var(--h);
         border-radius: 999px;
         background: #2a2f36;
-        transition: background 160ms ease;
         border: 1px solid var(--border);
-        cursor: pointer;
         display: inline-flex;
         align-items: center;
         padding: var(--p);
-        outline: none;
       }
-
-      .toggle:has(input:focus-visible) {
-        box-shadow: 0 0 0 4px var(--ring);
-      }
-
       .toggle input {
         position: absolute;
         inset: 0;
@@ -114,61 +89,53 @@
         margin: 0;
         cursor: pointer;
       }
-
       .knob {
         width: calc(var(--h) - var(--p) * 2);
         height: calc(var(--h) - var(--p) * 2);
         border-radius: 50%;
-        background: linear-gradient(180deg, #fff, #e9eef5);
-        transition: transform 180ms ease, box-shadow 180ms ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        background: #fff;
+        transition: transform 180ms ease;
       }
-
       .toggle.on {
-        background: color-mix(in oklab, var(--accent) 24%, #2a2f36);
-        border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+        background: rgba(77, 163, 255, 0.25);
+        border-color: rgba(77, 163, 255, 0.55);
       }
-
       .toggle.on .knob {
         transform: translateX(calc(var(--w) - var(--h)));
-        box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
       }
 
-      .row {
-        margin-top: 10px;
+      /* Interval input */
+      .field {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 12px;
+        gap: 8px;
+        width: 100%;
       }
-
+      .field input[type="number"] {
+        flex: 1;
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--fg);
+        outline: none;
+      }
+      .field button {
+        padding: 8px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--accent);
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 6px;
+      }
       .label {
         font-size: 13px;
-      }
-
-      /* Subtle micro-interaction */
-      .pulse {
-        animation: pulse 360ms ease;
-      }
-      @keyframes pulse {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.02);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-
-      /* Reduce motion */
-      @media (prefers-reduced-motion: reduce) {
-        .pulse,
-        .toggle .knob {
-          animation: none;
-          transition: none;
-        }
       }
     </style>
   </head>
@@ -177,15 +144,42 @@
       <div class="card" id="card">
         <div class="header">
           <h3>Sheilta Keepalive</h3>
-          <!-- visual toggle; uses the same checkbox under the hood -->
           <label class="toggle" id="toggleWrap" aria-label="Keepalive Enabled">
             <input type="checkbox" id="toggle" />
             <span class="knob"></span>
           </label>
         </div>
-        <div class="subtitle">Keep your session awake on Sheilta.</div>
+        <div class="subtitle">Keep your Sheilta session awake.</div>
+
         <div class="row">
           <div class="label" id="stateText">Disabled</div>
+        </div>
+
+        <div class="row" style="margin-top: 14px">
+          <div class="field" style="align-items: flex-start">
+            <div style="flex: 1">
+              <input
+                id="intervalInput"
+                type="number"
+                step="0.1"
+                min="0.1"
+                placeholder="Minutes"
+              />
+              <div class="hint">
+                Current: <span id="currentInterval">–</span> min
+              </div>
+              <div
+                id="errorMsg"
+                style="
+                  color: #e11;
+                  font-size: 12px;
+                  margin-top: 4px;
+                  display: none;
+                "
+              ></div>
+            </div>
+            <button id="setIntervalBtn" type="button">SET</button>
+          </div>
         </div>
       </div>
     </div>
